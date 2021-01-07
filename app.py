@@ -104,6 +104,19 @@ def create_post():
 
     return jsonify(post.serialize())
 
+import werkzeug
+import time
+
+
+@app.route('/index', methods=["POST"])
+def index():
+    print("receive")
+    imagefile = request.files['image']
+    filename = werkzeug.utils.secure_filename(imagefile.filename)
+    imagefile.save(filename)
+    print("response")
+    return "Hello"
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
